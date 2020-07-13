@@ -1,0 +1,105 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgresql
+data:
+  postgresql-name: test
+  postgresql-user: test
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgresql
+type: Opaque
+data:
+  postgresql-password: dGVzdDEyMw==
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rabbitmq
+data:
+  rabbitmq-user: test
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rabbitmq
+type: Opaque
+data:
+  rabbitmq-password: dGVzdDEyMw==
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: best-practices-on-kubernetes-deployment
+spec:
+  selector:
+    matchLabels:
+      app: best-practices-on-kubernetes
+  template:
+    metadata:
+      labels:
+        app: best-practices-on-kubernetes
+    spec:
+      containers:
+      - name: best-practices-on-kubernetes
+        image: piomin/best-practices-on-kubernetes
+        ports:
+        - containerPort: 8080
+        env:
+          - name: POSTGRES_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: postgresql
+                key: postgresql-name
+          - name: POSTGRES_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: postgresql
+                key: postgresql-user
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgresql
+                key: postgresql-password
+          - name: RABBITMQ_USER
+            valueFrom:
+              configMapKeyRef:
+                name: rabbitmq
+                key: rabbitmq-user
+          - name: RABBITMQ_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: rabbitmq
+                key: rabbitmq-password
+        livenessProbe:
+          httpGet:
+            port: 8080
+            path: /actuator/health/liveness
+            scheme: HTTP
+          periodSeconds: 3
+          initialDelaySeconds: 20
+          failureThreshold: 3
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            port: 8080
+            path: /actuator/health/readiness
+            scheme: HTTP
+          periodSeconds: 3
+          initialDelaySeconds: 20
+          failureThreshold: 3
+          timeoutSeconds: 1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: best-practices-on-kubernetes-service
+spec:
+  type: ClusterIP
+  selector:
+    app: best-practices-on-kubernetes
+  ports:
+  - port: 8080
+    name: http

@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: best-practices-on-kubernetes
+build:
+  artifacts:
+    - image: piomin/best-practices-on-kubernetes
+      jib:
+        args:
+          - -Pjib
+  tagPolicy:
+    gitCommit: {}
