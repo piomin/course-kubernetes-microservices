@@ -15,6 +15,9 @@ In the first three parts I'm showing how to configure local environment and use 
 Starting from fourth part we are discussing example applications written in Kotlin.
 
 [Part 1 - IDE & tools](https://www.youtube.com/watch?v=88u31ouE6m)
+
 [Part 2 - Cluster setup](https://www.youtube.com/watch?v=5tndHJXdDkE)
+
 [Part 3 - Skaffold & Jib](https://www.youtube.com/watch?v=lO1TzZWy56E)
+
 Part 4 - Best practices (in progress...)
