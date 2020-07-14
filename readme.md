@@ -20,4 +20,4 @@ Starting from fourth part we are discussing example applications written in Kotl
 
 [Part 3 - Skaffold & Jib](https://www.youtube.com/watch?v=lO1TzZWy56E)
 
-Part 4 - Best practices (in progress...)
+[Part 4 - Best practices](https://www.youtube.com/watch?v=ayoT9U4Pd8Y)
