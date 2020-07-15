@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: department-service
+build:
+  artifacts:
+    - image: piomin/department-service
+      jib:
+        args:
+          - -Pjib
+  tagPolicy:
+    gitCommit: {}

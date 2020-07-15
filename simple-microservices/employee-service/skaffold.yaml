@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: employee-service
+build:
+  artifacts:
+    - image: piomin/employee-service
+      jib:
+        args:
+          - -Pjib
+  tagPolicy:
+    gitCommit: {}
