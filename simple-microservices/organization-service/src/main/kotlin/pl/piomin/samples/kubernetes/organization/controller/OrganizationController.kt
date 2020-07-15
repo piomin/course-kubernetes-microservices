@@ -43,7 +43,7 @@ class OrganizationController(val repository: OrganizationRepository,
         } else null
     }
 
-    @GetMapping()
+    @GetMapping
     fun findAll(): Iterable<Organization> = repository.findAll()
 
 }
