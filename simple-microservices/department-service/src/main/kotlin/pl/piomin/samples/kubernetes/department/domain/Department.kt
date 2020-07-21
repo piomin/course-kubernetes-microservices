@@ -8,4 +8,4 @@ import javax.persistence.Id
 data class Department(@Id @GeneratedValue var id: Int? = null,
                       val name: String = "",
                       val organizationId: Int = 0,
-                      @Transient val employees: MutableSet<Employee> = mutableSetOf())
+                      @Transient val employees: MutableSet<AbstractEmployee> = mutableSetOf())

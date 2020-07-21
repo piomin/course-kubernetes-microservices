@@ -1,0 +1,119 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: microservices-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "microservices.example.com"
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: employee-service-gateway-route
+spec:
+  hosts:
+    - "microservices.example.com"
+  gateways:
+    - microservices-gateway
+  http:
+    - match:
+        - headers:
+            X-Version:
+              exact: v1
+          uri:
+            prefix: /employee
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: employee-service.default.svc.cluster.local
+            subset: v1
+    - match:
+        - uri:
+            prefix: /employee
+          headers:
+            X-Version:
+              exact: v2
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: employee-service.default.svc.cluster.local
+            subset: v2
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: department-service-gateway-route
+spec:
+  hosts:
+    - "microservices.example.com"
+  gateways:
+    - microservices-gateway
+  http:
+    - match:
+        - headers:
+            X-Version:
+              exact: v1
+          uri:
+            prefix: /department
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: department-service.default.svc.cluster.local
+            subset: v1
+    - match:
+        - uri:
+            prefix: /department
+          headers:
+            X-Version:
+              exact: v2
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: department-service.default.svc.cluster.local
+            subset: v2
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: organization-service-gateway-route
+spec:
+  hosts:
+    - "microservices.example.com"
+  gateways:
+    - microservices-gateway
+  http:
+    - match:
+        - headers:
+            X-Version:
+              exact: v1
+          uri:
+            prefix: /organization
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: organization-service.default.svc.cluster.local
+            subset: v1
+    - match:
+        - uri:
+            prefix: /organization
+          headers:
+            X-Version:
+              exact: v2
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: organization-service.default.svc.cluster.local
+            subset: v2

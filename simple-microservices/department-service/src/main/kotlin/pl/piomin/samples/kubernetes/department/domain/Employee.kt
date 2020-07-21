@@ -1,6 +1,6 @@
 package pl.piomin.samples.kubernetes.department.domain
 
-data class Employee(var id: Int = 0,
-                    val firstName: String = "",
-                    val lastName: String = "",
-                    val position: String = "")
+class Employee(id: Int = 0,
+               val firstName: String = "",
+               val lastName: String = "",
+               position: String = ""): AbstractEmployee(id, position)
