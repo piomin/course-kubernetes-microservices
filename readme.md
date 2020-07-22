@@ -25,3 +25,6 @@ $ cd best-practices
 
 [Part 5 - Inter-communication & gateway](https://www.youtube.com/watch?v=vT-tUogVOhk)
 $ cd simple-microservices
+
+[Part 6 - Service mesh](https://www.youtube.com/watch?v=TYpRzK03N80)
+$ cd simple-microservices
