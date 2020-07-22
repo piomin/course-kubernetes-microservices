@@ -9,6 +9,7 @@ To run the example applications you need to have installed:
 3. Maven
 4. Skaffold
 5. kubectl
+6. istioctl (Part 6 & 7)
 
 ### Structure 
 In the first three parts I'm showing how to configure local environment and use tools that simplifies development on Kubernetes.
