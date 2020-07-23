@@ -28,21 +28,21 @@ spec:
             X-Version:
               exact: v1
           uri:
-            prefix: /employee
+            prefix: "/employee"
       rewrite:
-        uri: /
+        uri: " "
       route:
         - destination:
             host: employee-service.default.svc.cluster.local
             subset: v1
     - match:
         - uri:
-            prefix: /employee
+            prefix: "/employee"
           headers:
             X-Version:
               exact: v2
       rewrite:
-        uri: /
+        uri: " "
       route:
         - destination:
             host: employee-service.default.svc.cluster.local
@@ -63,21 +63,21 @@ spec:
             X-Version:
               exact: v1
           uri:
-            prefix: /department
+            prefix: "/department"
       rewrite:
-        uri: /
+        uri: " "
       route:
         - destination:
             host: department-service.default.svc.cluster.local
             subset: v1
     - match:
         - uri:
-            prefix: /department
+            prefix: "/department"
           headers:
             X-Version:
               exact: v2
       rewrite:
-        uri: /
+        uri: " "
       route:
         - destination:
             host: department-service.default.svc.cluster.local
@@ -98,21 +98,21 @@ spec:
             X-Version:
               exact: v1
           uri:
-            prefix: /organization
+            prefix: "/organization"
       rewrite:
-        uri: /
+        uri: " "
       route:
         - destination:
             host: organization-service.default.svc.cluster.local
             subset: v1
     - match:
         - uri:
-            prefix: /organization
+            prefix: "/organization"
           headers:
             X-Version:
               exact: v2
       rewrite:
-        uri: /
+        uri: " "
       route:
         - destination:
             host: organization-service.default.svc.cluster.local
