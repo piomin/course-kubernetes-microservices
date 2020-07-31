@@ -1,0 +1,23 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: simple-microservices
+build:
+  artifacts:
+    - image: piomin/employee-service
+      jib:
+        args:
+          - -Pjib
+        project: employee-service
+    - image: piomin/department-service
+      jib:
+        args:
+          - -Pjib
+        project: department-service
+    - image: piomin/organization-service
+      jib:
+        args:
+          - -Pjib
+        project: organization-service
+  tagPolicy:
+    gitCommit: {}
