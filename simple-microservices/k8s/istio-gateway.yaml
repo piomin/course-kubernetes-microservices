@@ -1,4 +1,4 @@
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: microservices-gateway
@@ -11,15 +11,15 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        - "microservices.example.com"
+        - "*"
 ---
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: employee-service-gateway-route
 spec:
   hosts:
-    - "microservices.example.com"
+    - "*"
   gateways:
     - microservices-gateway
   http:
@@ -48,13 +48,13 @@ spec:
             host: employee-service.default.svc.cluster.local
             subset: v2
 ---
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: department-service-gateway-route
 spec:
   hosts:
-    - "microservices.example.com"
+    - "*"
   gateways:
     - microservices-gateway
   http:
@@ -83,13 +83,13 @@ spec:
             host: department-service.default.svc.cluster.local
             subset: v2
 ---
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: organization-service-gateway-route
 spec:
   hosts:
-    - "microservices.example.com"
+    - "*"
   gateways:
     - microservices-gateway
   http:

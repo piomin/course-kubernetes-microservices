@@ -12,6 +12,8 @@ spec:
       labels:
         app: department
         version: v1
+      annotations:
+        sidecar.istio.io/inject: "true"
     spec:
       containers:
       - name: department
@@ -43,6 +45,8 @@ spec:
       labels:
         app: department
         version: v2
+      annotations:
+        sidecar.istio.io/inject: "true"
     spec:
       containers:
         - name: department
