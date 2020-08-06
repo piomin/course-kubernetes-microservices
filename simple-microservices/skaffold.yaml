@@ -21,3 +21,6 @@ build:
         project: organization-service
   tagPolicy:
     gitCommit: {}
+deploy:
+  kubectl:
+    manifests: ["k8s/*.yaml", "employee-service/k8s/*.yaml", "department-service/k8s/*.yaml", "organization-service/k8s/*.yaml" ]
