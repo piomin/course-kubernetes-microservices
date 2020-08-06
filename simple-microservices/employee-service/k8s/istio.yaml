@@ -3,7 +3,7 @@ kind: DestinationRule
 metadata:
   name: employee-service-destination
 spec:
-  host: employee-service.default.svc.cluster.local
+  host: employee-service.microservices.svc.cluster.local
   subsets:
     - name: v1
       labels:
@@ -26,7 +26,7 @@ spec:
               exact: v1
       route:
         - destination:
-            host: employee-service.default.svc.cluster.local
+            host: employee-service.microservices.svc.cluster.local
             subset: v1
     - match:
         - headers:
@@ -34,9 +34,9 @@ spec:
               exact: v2
       route:
         - destination:
-            host: employee-service.default.svc.cluster.local
+            host: employee-service.microservices.svc.cluster.local
             subset: v2
     - route:
         - destination:
-            host: employee-service.default.svc.cluster.local
+            host: employee-service.microservices.svc.cluster.local
             subset: v1

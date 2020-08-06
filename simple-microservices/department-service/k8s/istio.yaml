@@ -3,7 +3,7 @@ kind: DestinationRule
 metadata:
   name: department-service-destination
 spec:
-  host: department-service.default.svc.cluster.local
+  host: department-service.microservices.svc.cluster.local
   subsets:
     - name: v1
       labels:
@@ -18,7 +18,7 @@ metadata:
   name: department-service-route
 spec:
   hosts:
-    - department-service.default.svc.cluster.local
+    - department-service.microservices.svc.cluster.local
   http:
     - match:
         - headers:
@@ -26,7 +26,7 @@ spec:
               exact: v1
       route:
         - destination:
-            host: department-service.default.svc.cluster.local
+            host: department-service.microservices.svc.cluster.local
             subset: v1
     - match:
         - headers:
@@ -34,9 +34,9 @@ spec:
               exact: v2
       route:
         - destination:
-            host: department-service.default.svc.cluster.local
+            host: department-service.microservices.svc.cluster.local
             subset: v2
     - route:
         - destination:
-            host: department-service.default.svc.cluster.local
+            host: department-service.microservices.svc.cluster.local
             subset: v1
