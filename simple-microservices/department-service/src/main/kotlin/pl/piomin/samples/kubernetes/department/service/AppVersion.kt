@@ -12,6 +12,6 @@ class AppVersion {
             file.readLines().first{ it.startsWith("version=")}
                     .split("=")[1]
                     .replace("\"", "")
-        } else null
+        } else "v1"
     }
 }
