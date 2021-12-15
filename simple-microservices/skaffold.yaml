@@ -1,23 +1,28 @@
-apiVersion: skaffold/v2beta5
+apiVersion: skaffold/v2beta22
 kind: Config
 metadata:
   name: simple-microservices
 build:
   artifacts:
-    - image: piomin/employee-service
-      jib:
-        args:
-          - -Pjib
-        project: employee-service
-    - image: piomin/department-service
-      jib:
-        args:
-          - -Pjib
-        project: department-service
-    - image: piomin/organization-service
-      jib:
-        args:
-          - -Pjib
-        project: organization-service
+  - image: piomin/employee-service
+    jib:
+      project: employee-service
+      args:
+      - -Pjib
+  - image: piomin/department-service
+    jib:
+      project: department-service
+      args:
+      - -Pjib
+  - image: piomin/organization-service
+    jib:
+      project: organization-service
+      args:
+      - -Pjib
   tagPolicy:
     gitCommit: {}
+deploy:
+  kubectl:
+    manifests:
+    - k8s/*.yaml
+    - '*/k8s/*.yaml'

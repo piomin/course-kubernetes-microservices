@@ -1,12 +1,12 @@
-apiVersion: skaffold/v2beta5
+apiVersion: skaffold/v2beta22
 kind: Config
 metadata:
   name: organization-service
 build:
   artifacts:
-    - image: piomin/organization-service
-      jib:
-        args:
-          - -Pjib
+  - image: piomin/organization-service
+    jib:
+      args:
+      - -Pjib
   tagPolicy:
     gitCommit: {}
