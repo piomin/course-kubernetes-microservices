@@ -11,6 +11,7 @@ import pl.piomin.samples.kubernetes.department.domain.EmployeeV2
 import pl.piomin.samples.kubernetes.department.repository.DepartmentRepository
 import pl.piomin.samples.kubernetes.department.service.AppVersion
 import java.util.*
+import kotlin.math.log
 
 @RestController
 @RequestMapping("/departments")
@@ -27,7 +28,7 @@ class DepartmentController(val repository: DepartmentRepository,
     fun addWithEmployees(@RequestBody department: Department): Department {
         val departmentSaved: Department = repository.save(department)
         department.employees.forEach {
-            restTemplate.postForObject("http://employee-service:8080/employees",
+            restTemplate.postForObject("http://employee:8080/employees",
                 it, Employee::class.java)
         }
         return departmentSaved
@@ -41,15 +42,16 @@ class DepartmentController(val repository: DepartmentRepository,
         val optDepartment: Optional<Department> = repository.findById(id)
         return if (optDepartment.isPresent) {
             val department: Department = optDepartment.get()
-//            val employees = restTemplate.getForObject("http://employee-service:8080/employees/department/{departmentId}",
-//                    Array<Employee>::class.java, department.id)
             department.employees.addAll(getEmployeesByDepartmentId(department.id!!)!!)
             department
         } else null
     }
 
-    @GetMapping()
-    fun findAll(): Iterable<Department> = repository.findAll()
+    @GetMapping
+    fun findAll(): Iterable<Department> {
+        logger.info("findAll()")
+        return repository.findAll()
+    }
 
     @GetMapping("/organization/{organizationId}")
     fun findByOrganizationId(@PathVariable organizationId: Int) =
@@ -58,10 +60,10 @@ class DepartmentController(val repository: DepartmentRepository,
     fun getEmployeesByDepartmentId(departmentId: Int): Array<out AbstractEmployee>? {
         logger.info("Version: {}", appVersion.getVersion())
         return if (appVersion.getVersion()!!.contains("v1")) {
-            restTemplate.getForObject("http://employee-service:8080/employees/department/{departmentId}",
+            restTemplate.getForObject("http://employee:8080/employees/department/{departmentId}",
                     Array<Employee>::class.java, departmentId)
         } else {
-            restTemplate.getForObject("http://employee-service:8080/employees/department/{departmentId}",
+            restTemplate.getForObject("http://employee:8080/employees/department/{departmentId}",
                     Array<EmployeeV2>::class.java, departmentId)
         }
     }

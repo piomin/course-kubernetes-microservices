@@ -24,7 +24,7 @@ class OrganizationController(val repository: OrganizationRepository,
         val optOrganization: Optional<Organization> = repository.findById(id)
         return if (optOrganization.isPresent) {
             val organization: Organization = optOrganization.get()
-            val employees = restTemplate.getForObject("http://employee-service:8080/employees/organization/{organizationId}",
+            val employees = restTemplate.getForObject("http://employee:8080/employees/organization/{organizationId}",
                 Array<Employee>::class.java, organization.id)
             organization.employees.addAll(employees!!)
             organization
@@ -36,7 +36,7 @@ class OrganizationController(val repository: OrganizationRepository,
         val optOrganization: Optional<Organization> = repository.findById(id)
         return if (optOrganization.isPresent) {
             val organization: Organization = optOrganization.get()
-            val departments = restTemplate.getForObject("http://department-service:8080/departments/organization/{organizationId}",
+            val departments = restTemplate.getForObject("http://department:8080/departments/organization/{organizationId}",
                 Array<Department>::class.java, organization.id)
             organization.departments.addAll(departments!!)
             organization
