@@ -1,23 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: department-deployment-v1
+  name: department
 spec:
   selector:
     matchLabels:
       app: department
-      version: v1
   template:
     metadata:
       labels:
         app: department
-        version: v1
     spec:
       containers:
       - name: department
         image: piomin/department-service
         ports:
         - containerPort: 8080
+          name: http
         volumeMounts:
           - mountPath: /etc/podinfo
             name: podinfo
@@ -29,41 +28,10 @@ spec:
                 fieldRef:
                   fieldPath: metadata.labels
 ---
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: department-deployment-v2
-spec:
-  selector:
-    matchLabels:
-      app: department
-      version: v2
-  template:
-    metadata:
-      labels:
-        app: department
-        version: v2
-    spec:
-      containers:
-        - name: department
-          image: piomin/department-service
-          ports:
-            - containerPort: 8080
-          volumeMounts:
-            - mountPath: /etc/podinfo
-              name: podinfo
-      volumes:
-        - name: podinfo
-          downwardAPI:
-            items:
-              - path: "labels"
-                fieldRef:
-                  fieldPath: metadata.labels
----
 apiVersion: v1
 kind: Service
 metadata:
-  name: department-service
+  name: department
 spec:
   type: ClusterIP
   selector:
@@ -71,3 +39,4 @@ spec:
   ports:
   - port: 8080
     targetPort: 8080
+    name: http
