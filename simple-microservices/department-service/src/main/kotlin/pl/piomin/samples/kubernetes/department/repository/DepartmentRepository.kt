@@ -5,6 +5,6 @@ import pl.piomin.samples.kubernetes.department.domain.Department
 
 interface DepartmentRepository: CrudRepository<Department, Int> {
 
-    fun findByOrganizationId(organizationId: Int): List<Department>
+    fun findByOrganizationId(organizationId: Int)
 
 }
