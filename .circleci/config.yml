@@ -12,8 +12,8 @@ jobs:
 
 executors:
   jdk:
-  docker:
-    - image: 'cimg/openjdk:11.0'
+    docker:
+      - image: 'cimg/openjdk:11.0'
 
 orbs:
   maven: circleci/maven@1.4.0
