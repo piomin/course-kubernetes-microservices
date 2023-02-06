@@ -43,6 +43,18 @@ class OrganizationController(val repository: OrganizationRepository,
         } else null
     }
 
+    @GetMapping("/{id}/with-departments-and-employees")
+    fun findByIdWithDepartmentsAndEmployees(@PathVariable id: Int): Organization? {
+        val optOrganization: Optional<Organization> = repository.findById(id)
+        return if (optOrganization.isPresent) {
+            val organization: Organization = optOrganization.get()
+            val departments = restTemplate.getForObject("http://department:8080/departments/organization/{organizationId}",
+                Array<Department>::class.java, organization.id)
+            organization.departments.addAll(departments!!)
+            organization
+        } else null
+    }
+
     @GetMapping
     fun findAll(): Iterable<Organization> = repository.findAll()
 
