@@ -1,12 +1,11 @@
 package pl.piomin.samples.kubernetes.domain
 
-import javax.persistence.Entity
-import javax.persistence.EnumType
-import javax.persistence.Enumerated
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
-data class Person(@Id var id: Int?,
+data class Person(@Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Int?,
                   var name: String,
                   var age: Int,
-                  @Enumerated(EnumType.ORDINAL) var gender: Gender)
+                  @Enumerated(EnumType.ORDINAL) var gender: Gender) {
+    constructor() : this(null, "", 0, Gender.MALE)
+}

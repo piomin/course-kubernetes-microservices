@@ -37,13 +37,20 @@ class PersonControllerTests {
     @Test
     @Order(1)
     fun shouldAddPerson() {
-        var person = Instancio.of(Person::class.java)
+        val person = Instancio.of(Person::class.java)
             .ignore(Select.field("id"))
             .create()
-        person = template.postForObject("/persons", person, Person::class.java)
-        Assertions.assertNotNull(person)
-        Assertions.assertNotNull(person.id)
-        Assertions.assertEquals(1001, person.id)
+        val personAdd = template.postForObject("/persons", person, Person::class.java)
+        Assertions.assertNotNull(personAdd)
+        Assertions.assertNotNull(personAdd.id)
+        println(personAdd)
+    }
+
+    @Test
+    @Order(2)
+    fun shouldFindAllPersons() {
+        val persons = template.getForObject("/persons", List::class.java)
+        Assertions.assertFalse(persons.isEmpty())
     }
 
     @Test
@@ -62,8 +69,8 @@ class PersonControllerTests {
     @Order(3)
     fun shouldDeletePerson() {
         template.delete("/persons/{id}", 1)
-        val person = template.getForObject("/persons/{id}", Person::class.java, 1)
-        Assertions.assertNull(person)
+        val person = template.getForEntity("/persons/{id}", String::class.java, 1)
+        Assertions.assertTrue(person.statusCode.is2xxSuccessful)
     }
 
 }

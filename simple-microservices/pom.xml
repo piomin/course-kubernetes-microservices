@@ -11,6 +11,11 @@
 
 	<artifactId>simple-microservices</artifactId>
 	<packaging>pom</packaging>
+
+	<properties>
+		<sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
+	</properties>
+
 	<modules>
 		<module>employee-service</module>
 		<module>department-service</module>

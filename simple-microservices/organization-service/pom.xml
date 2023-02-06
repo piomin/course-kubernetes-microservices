@@ -13,6 +13,10 @@
 	<artifactId>organization-service</artifactId>
 	<version>1.0</version>
 
+	<properties>
+		<sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

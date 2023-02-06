@@ -16,6 +16,8 @@ spring:
     password: ${RABBITMQ_PASSWORD}
     port: 5672
     connection-timeout: 2000
+  liquibase.change-log: classpath:db/changeLog.sql
+
 management:
   endpoints.web.exposure.include: '*'
   endpoint:
