@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-util-app
+spec:
+  selector:
+    matchLabels:
+      app: sample-util-app
+  template:
+    metadata:
+      labels:
+        app: sample-util-app
+    spec:
+      serviceAccountName: webapp-sa
+      containers:
+        - name: sample-util-app
+          image: piomin/sample-util-app
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - mountPath: /mnt/secrets-store
+              name: secrets-store
+              readOnly: true
+      volumes:
+        - name: secrets-store
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "vault-database"

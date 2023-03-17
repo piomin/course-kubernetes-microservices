@@ -28,6 +28,7 @@
 	<modules>
 		<module>best-practices</module>
 		<module>simple-microservices</module>
+		<module>spring-util-app</module>
 	</modules>
 
 	<dependencyManagement>

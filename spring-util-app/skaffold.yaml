@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2beta22
+kind: Config
+metadata:
+  name: sample-util-app
+build:
+  artifacts:
+    - image: piomin/sample-util-app
+      jib:
+        args:
+          - -Pjib
+  tagPolicy:
+    gitCommit: {}
