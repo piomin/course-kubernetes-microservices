@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.1.RELEASE</version>
+		<version>3.0.5</version>
 		<relativePath/>
 	</parent>
 
@@ -17,7 +17,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<kotlin.version>1.8.20</kotlin.version>
 		<testcontainers.version>1.17.6</testcontainers.version>
 		<sonar.projectKey>piomin_course-kubernetes-microservices</sonar.projectKey>

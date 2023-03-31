@@ -1,6 +1,6 @@
 package pl.piomin.samples.kubernetes.domain
 
-import javax.persistence.*
+import jakarta.persistence.*
 
 @Entity
 data class Person(@Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Int?,
