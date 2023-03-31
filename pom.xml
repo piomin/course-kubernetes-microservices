@@ -17,7 +17,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<kotlin.version>1.8.10</kotlin.version>
 		<testcontainers.version>1.17.6</testcontainers.version>
 		<sonar.projectKey>piomin_course-kubernetes-microservices</sonar.projectKey>
