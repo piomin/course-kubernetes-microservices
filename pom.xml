@@ -18,7 +18,7 @@
 
 	<properties>
 		<java.version>17</java.version>
-		<kotlin.version>2.1.10</kotlin.version>
+		<kotlin.version>2.1.20</kotlin.version>
 		<testcontainers.version>1.20.6</testcontainers.version>
 		<sonar.projectKey>piomin_course-kubernetes-microservices</sonar.projectKey>
 		<sonar.organization>piomin</sonar.organization>
