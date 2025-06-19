@@ -19,7 +19,7 @@
 	<properties>
 		<java.version>17</java.version>
 		<kotlin.version>2.1.21</kotlin.version>
-		<testcontainers.version>1.21.1</testcontainers.version>
+		<testcontainers.version>1.21.2</testcontainers.version>
 		<sonar.projectKey>piomin_course-kubernetes-microservices</sonar.projectKey>
 		<sonar.organization>piomin</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
