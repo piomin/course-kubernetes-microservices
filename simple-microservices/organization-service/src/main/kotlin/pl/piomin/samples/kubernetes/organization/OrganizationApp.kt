@@ -1,8 +1,8 @@
 package pl.piomin.samples.kubernetes.organization
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.restclient.RestTemplateBuilder
 import org.springframework.boot.runApplication
-import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.web.client.RestTemplate
 import java.time.Duration
@@ -13,7 +13,7 @@ class OrganizationApp {
     @Bean
     fun restTemplate(): RestTemplate =
             RestTemplateBuilder()
-                    .setReadTimeout(Duration.ofMillis(1000L))
+                    .readTimeout(Duration.ofMillis(1000L))
                     .build()
 
 }
