@@ -5,12 +5,14 @@ import org.instancio.Select
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.resttestclient.TestRestTemplate
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.web.client.TestRestTemplate
 import pl.piomin.samples.kubernetes.employee.domain.Employee
 import pl.piomin.samples.kubernetes.employee.domain.dto.EmployeeV1DTO
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureTestRestTemplate
 class EmployeeControllerTests {
 
     @Autowired
@@ -31,7 +33,7 @@ class EmployeeControllerTests {
     fun shouldGetEmployeeById() {
         val employee = template.getForObject("/employees/{id}", EmployeeV1DTO::class.java, 1)
         assertNotNull(employee)
-        assertNotNull(employee.id)
+        assertNotNull(employee!!.id)
         assertEquals(1, employee.id)
     }
 
@@ -39,6 +41,6 @@ class EmployeeControllerTests {
     fun shouldGetEmployeeByOrganizationId() {
         val employees = template.getForObject("/employees/organization/{organizationId}", Array<EmployeeV1DTO>::class.java, 1)
         assertNotNull(employees)
-        assertTrue(employees.isNotEmpty())
+        assertTrue(employees!!.isNotEmpty())
     }
 }
