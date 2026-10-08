@@ -32,13 +32,13 @@ jobs:
           command: mvn test
 
 orbs:
-  maven: circleci/maven@2.1.1
+  maven: circleci/maven@2.2.0
   git-shallow-clone: guitarrapc/git-shallow-clone@2.8.0
 
 executors:
   machine_executor_amd64:
     machine:
-      image: ubuntu-2204:2023.10.1
+      image: ubuntu-2204:current
     environment:
       architecture: "amd64"
       platform: "linux/amd64"
