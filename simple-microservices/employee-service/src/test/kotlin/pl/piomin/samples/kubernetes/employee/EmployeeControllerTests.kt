@@ -23,7 +23,7 @@ class EmployeeControllerTests {
         var employee = Instancio.of(Employee::class.java)
             .ignore(Select.field("id"))
             .create()
-        employee = template.postForObject("/employees", employee, Employee::class.java)
+        employee = template.postForObject("/employees", employee, Employee::class.java)!!
         assertNotNull(employee)
         assertNotNull(employee.id)
         assertEquals(9, employee.id)
